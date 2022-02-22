@@ -11,12 +11,13 @@ function App() {
   const [paginaActual, setPaginaActual] = useState(1);
   const [totalPagina, setTotalPagina] = useState(1);
   useEffect(() => {
-    if (busqueda === "" || !botonBuscar) return;
+    // if (busqueda === "" || !botonBuscar) return;
+    if (busqueda === "") return;
     const consultarApi = async () => {
       console.log("entro");
       const imagenesXPagina = 30;
       const key = "16062309-ec3637ebed45675de2b6022a9";
-      const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&image_type=${imageType}&pretty=true&per_page${imagenesXPagina}`;
+      const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&image_type=${imageType}&pretty=true&per_page${imagenesXPagina}&page=${paginaActual}`;
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
       console.log(resultado);
@@ -27,7 +28,7 @@ function App() {
     };
     consultarApi();
     setBotonBuscar(false);
-  }, [botonBuscar]);
+  }, [botonBuscar, paginaActual]);
 
   useEffect(() => {
     const docNext = document.getElementById("next");
@@ -46,22 +47,17 @@ function App() {
     }
   }, [paginaActual, totalPagina]);
 
+  useEffect(() => {
+    setPaginaActual(1);
+    setTotalPagina(1);
+  }, [botonBuscar]);
+
   //funciones
   const paginaAnterior = () => {
-    // if (paginaActual == 1) {
-    //   return;
-    // }
-    // const pagina = paginaActual - 1;
     setPaginaActual(paginaActual - 1);
   };
 
   const paginaSiguiente = () => {
-    const doc = document.getElementById("previous");
-    doc.classList.remove(["disabled"]);
-    //doc.classList.add(["disabled"]);
-    // if (paginaActual == 1) {
-    //   return;
-    // }
     setPaginaActual(paginaActual + 1);
   };
 
