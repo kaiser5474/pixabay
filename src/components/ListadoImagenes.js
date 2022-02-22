@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Imagen from "./Imagen";
 
-const ListadoImagenes = () => {
+const ListadoImagenes = ({ imagenes }) => {
   return (
-    <div>ListadoImagenes</div>
-  )
-}
+    <div className="col-12 p-5 row">
+      {imagenes.map((imagen) => (
+        <Imagen imagen={imagen} key={imagen.id} />
+      ))}
+    </div>
+  );
+};
 
-export default ListadoImagenes
+export default ListadoImagenes;
