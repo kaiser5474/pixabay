@@ -20,11 +20,12 @@ function App() {
       const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&image_type=${imageType}&pretty=true&per_page${imagenesXPagina}&page=${paginaActual}`;
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
-      console.log(resultado);
       const totalHits = Math.ceil(resultado.totalHits / imagenesXPagina);
       setTotalPagina(totalHits);
-      console.log(totalHits);
       setImagenes(resultado.hits);
+
+      const jumbotron = document.querySelector(".jumbotron");
+      jumbotron.scrollIntoView({ behavior: "smooth" });
     };
     consultarApi();
     setBotonBuscar(false);
