@@ -12,7 +12,7 @@ const Formulario = ({ setBusqueda, setImageType, setBotonBuscar }) => {
       return;
     }
     setBusqueda(termino);
-    setBotonBuscar(true)
+    setBotonBuscar(true);
     setError(false);
   };
   return (
